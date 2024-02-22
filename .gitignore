@@ -6,6 +6,4 @@ dist
 __pycache__
 .ipynb_checkpoints
 
-src/ipyclipboard/static
-
 Untitled*.ipynb
