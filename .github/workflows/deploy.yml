@@ -57,7 +57,7 @@ jobs:
           path: ./dist
 
   deploy_lite:
-    needs: build
+    needs: [build_lite]
     if: github.ref == 'refs/heads/main'
     permissions:
       pages: write
