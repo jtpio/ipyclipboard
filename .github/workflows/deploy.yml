@@ -50,11 +50,11 @@ jobs:
         run: |
           mkdir content
           cp example.ipynb content
-          jupyter lite build --contents content --output-dir dist
+          jupyter lite build --contents content
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: _output
 
   deploy_lite:
     needs: [build_lite]
