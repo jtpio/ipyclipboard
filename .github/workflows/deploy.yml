@@ -27,8 +27,9 @@ jobs:
       - name: Build the JupyterLite site
         shell: bash -l {0}
         run: |
+          cd demo
           mkdir content
-          cp example.ipynb README.md content
+          cp ../example.ipynb ../README.md content
           jupyter lite build --contents content
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
