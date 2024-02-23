@@ -4,12 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ipyclipboard"
-version = "0.0.0"
 dependencies = ["anywidget"]
 readme = "README.md"
+dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = ["watchfiles", "jupyterlab"]
+
+[tool.hatch.version]
+path = "src/ipyclipboard/__about__.py"
 
 # automatically add the dev feature to the default env (e.g., hatch shell)
 [tool.hatch.envs.default]
