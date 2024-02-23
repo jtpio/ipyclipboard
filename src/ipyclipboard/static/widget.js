@@ -1,5 +1,3 @@
-import "./widget.css";
-
 function initialize({ model }) {
   window.addEventListener("copy", (event) => {
     const selection = window.getSelection();
