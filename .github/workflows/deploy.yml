@@ -9,28 +9,8 @@ on:
       - '*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Build ipyclipboard
-        run: |
-          python -m pip install build
-          python -m build --wheel
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist/*
-
   build_lite:
     runs-on: ubuntu-latest
-    needs: [build]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,23 +18,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Download artifact
-        uses: actions/download-artifact@v2
+      - name: Install mamba
+        uses: mamba-org/setup-micromamba@v1
         with:
-          name: dist
-          path: ./dist
-      - name: Install the dependencies
-        run: |
-          python -m pip install jupyterlite-pyodide-kernel notebook dist/*.whl
+          micromamba-version: '1.5.0-0'
+          environment-file: demo/build-environment.yml
+          cache-environment: true
       - name: Build the JupyterLite site
+        shell: bash -l {0}
         run: |
+          cd demo
           mkdir content
-          cp example.ipynb content
+          cp ../example.ipynb ../README.md content
           jupyter lite build --contents content
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _output
+          path: demo/_output
 
   deploy_lite:
     needs: [build_lite]
