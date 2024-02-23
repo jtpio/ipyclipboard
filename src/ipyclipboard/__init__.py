@@ -1,13 +1,9 @@
-import importlib.metadata
 import pathlib
 
 import anywidget
 from traitlets import Unicode
 
-try:
-    __version__ = importlib.metadata.version("ipyclipboard")
-except importlib.metadata.PackageNotFoundError:
-    __version__ = "unknown"
+from .__about__ import __version__
 
 
 class Clipboard(anywidget.AnyWidget):
