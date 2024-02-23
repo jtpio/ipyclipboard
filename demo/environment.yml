@@ -1,0 +1,9 @@
+name: ipyclipboard-demo
+channels:
+  - https://repo.mamba.pm/emscripten-forge
+  - conda-forge
+dependencies:
+  - xeus-python
+  - anywidget
+  - pip:
+    - ..
